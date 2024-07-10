@@ -136,7 +136,7 @@ func main() {
     http.HandleFunc("/", helloDocker)
 
     fmt.Println("Server running on port 8080")
-    
+
     http.ListenAndServe(":8080", nil)
 }
 **************************************************************************************
@@ -293,21 +293,31 @@ Creating a Go Application:
 package main
 
 import (
+
     "fmt"
+
     "os"
 )
 
 func main() {
+
     file, err := os.Create("testfile.txt")
+
     if err != nil {
+
         fmt.Println("Error creating file:", err)
+        
         return
     }
+
     defer file.Close()
     
     _, err = file.WriteString("Hello, World!\n")
+
     if err != nil {
+
         fmt.Println("Error writing to file:", err)
+        
     }
 }
 
