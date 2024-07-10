@@ -1,0 +1,101 @@
+# evolution of role
+sysadmin -> devops -> SRE
+
+# sysadmin
+challenges:
+1. traditional waterfall model
+2. no proper communication and goals
+3. more manual activities - application deployment on server, configuration etc...
+4. system management is expensive
+
+# DevOps
+1. colloboration
+2. Continuous integration and continuous deployment
+3. Agile and scrum
+
+# SRE
+1. Incident response and management
+2. monitoring 
+3. capacity planning
+4. Reliability testing(chaos engineering)
+5. Develop tools
+6. Agile and scrum
+
+Note: SRE main focus on reliability and Devops focus on quick delivery of application features
+------------------------------------------------------------------------------------
+# evolution of tools
+Physical server -> Virtual machine -> Containerization(tool-Docker) -> Container Orchestrator(tool- kubernetes)
+
+# Physical server
+
+                   -----------------
+                   |  Application    |
+                   -------------------
+                   | operating system |
+                   ------------------
+                   | infrastructure |
+                   ------------------
+# challenges
+1. Each physical server could only run a single operating system (OS) and application stack. This led to inefficient use of hardware resources, as much of the server's capacity would often go underutilized.
+2. Without virtualization, applications on a single physical server shared resources like CPU, memory, and storage directly. This could lead to resource contention, where one application's resource usage could negatively impact the performance of others.
+3. Running multiple applications or services on separate physical servers required significant hardware investments, leading to higher costs for purchasing, maintaining, and managing the hardware infrastructure.
+4. Scaling up or down was often cumbersome and time-consuming, requiring the provisioning of new hardware. This made it difficult to quickly respond to changing workloads or demands.
+
+summary:
+- single operating system
+- resource contention
+- higher cost of purchase and maintain
+- scaling up or down is difficult
+
+# Virtual machine
+
+            -----------------------------------
+            |  APP1    |   APP2    |  APP3    |
+            | guest os |  guest os | guest os |
+            |   vm1    |  vm2      | vm3      |
+            ------------------------------------       
+                     | Hypervisor |
+                     ----------------   
+                     |infrastructure|
+                      --------------
+# challenges
+1. Resources assigned to VMs are utilized by OS (like kernel services, other services), rest will be used by actual application.
+2. Moving VMs between different environments can be more challenging due to differences in underlying infrastructure and hypervisors.
+3. VMs take longer to start because they need to boot a complete guest OS.
+Over-provisioning resources for VMs to accommodate potential spikes can lead to underutilization during periods of lower demand. 
+4. Scaling VM-based applications can be slower and less efficient.
+
+summary: 
+- portability is difficult
+- scaling is difficult
+- VM take long time for start or boot
+
+# Containerization
+1. A container is a bundle of Application, Application libraries required to run your application and the minimum system dependencies.
+2. Managing containers is typically easier than managing VMs, as containers are designed to be lightweight and fast-moving.
+3. Containers are designed to be portable and can run on any system with a compatible host operating system.
+4. Containers share the host operating system kernel, making them lighter and faster than VMs.
+
+            -----------------------------------
+            |  APP1    |   APP2    |  APP3    |
+            ------------------------------------       
+                     | Hypervisor |
+                     ----------------   
+                     |infrastructure|
+                     --------------
+
+# Docker
+1. Docker is widely recognized and adopted, making it a standard in the containerization landscape.
+2. Docker's user-friendly CLI and intuitive interface simplify the process of creating, managing, and deploying containers. using Docker you can build container images, run the images to create containers and also push these containers to container registries.         
+3. In simple words, you can understand as containerization is a concept or technology and Docker Implements Containerization.
+
+# Challenges
+1. Managing containers required significant manual effort. Developers had to handle tasks like deployment, scaling, load balancing, and failover on their own, which could lead to errors, inconsistencies, and operational inefficiencies.
+2. Ensuring high availability and automated failover of containers in case of node failures or other issues required custom solutions and scripts.
+3. Building and maintaining custom solutions for container orchestration and management added complexity to the development and operations processes.
+
+# Container orchestrator
+# kubernetes
+1. Kubernetes is the most popular container orchestration platform, largely due to its powerful features, flexibility, and broad community support.
+2. It automates the deployment, scaling, and management of containerized applications. It can automatically scale applications based on demand, ensuring optimal resource utilization.
+3. It provides built-in mechanisms for high availability and fault tolerance. It can automatically restart containers that fail, replace unhealthy nodes, and distribute workloads to ensure application availability.
