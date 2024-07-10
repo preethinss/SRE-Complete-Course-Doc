@@ -13,8 +13,11 @@
     stress-ng --vm 1 --vm-bytes 800M --vm-method all --timeout 300s:
 
     --vm 1: Starts one virtual memory stressor.
+
     --vm-bytes 800M: Allocates 800MB of memory.
+
     --vm-method all: Uses all available memory stress methods.
+
     --timeout 300s: Runs the stress test for 300 seconds (5 minutes). 
 
 4. Allocating Swap Space
@@ -22,9 +25,13 @@
     Creating Swap File:
 
     fallocate -l 1G /swapfile: Creates a swap file of 1GB.
+
     chmod 600 /swapfile: Sets the correct permissions for the swap file.
+
     mkswap /swapfile: Sets up the swap area on the file.
+
     swapon /swapfile: Enables the swap file.
+
     swapon --show: Displays the swap space currently in use.
 
 Summary:
@@ -46,14 +53,13 @@ Swap space is a portion of the hard drive/disk that the operating system uses as
 * Out of Memory (OOM) Killer:
 
 When both RAM and swap space are exhausted, the system becomes critically low on memory.
-The OOM killer is a process in the Linux kernel that frees up memory by terminating processes. It usually targets processes consuming the most memory or processes that are less critical to system stability.
-This can include your application, leading to its termination.
+The OOM killer is a process in the Linux kernel that frees up memory by terminating processes. It usually targets processes consuming the most memory or processes that are less critical to system stability.This can include your application, leading to its termination.
 
 * Impact on Application
 
-Application Termination: If the OOM killer terminates your application, it becomes unavailable, leading to service disruption.
-Increased Latency: When the application is terminated and restarted, there is a period of unavailability and potential latency in processing requests.
-Error Logs: You can observe memory-related errors in the system logs, typically found in /var/log/syslog
+1. Application Termination: If the OOM killer terminates your application, it becomes unavailable, leading to service disruption.
+2. Increased Latency: When the application is terminated and restarted, there is a period of unavailability and potential latency in processing requests.
+3. Error Logs: You can observe memory-related errors in the system logs, typically found in /var/log/syslog
 *************************************************************************************
 *************************************************************************************   
 # CPU stress/load scenario
@@ -64,28 +70,29 @@ Error Logs: You can observe memory-related errors in the system logs, typically 
     Running Hey: hey -n 100 -c 10 application_url
 
         -n 100: This parameter specifies the total number of requests to send.
+
         -c 10: This parameter specifies the number of concurrent workers to use.
+
         application_url: This is the URL of the application you want to test (e.g., localhost:8080).
 
 2. Observing Load Average
 
-Load Average: This is a measure of the work that a computer system is performing. It is typically represented as three numbers reflecting the load over the last 1, 5, and 15 minutes.
+* Load Average: This is a measure of the work that a computer system is performing. It is typically represented as three numbers reflecting the load over the last 1, 5, and 15 minutes.
 
 # Scenario Explained
 
 Generating Load: 
 
-By running hey -n 100 -c 10 application_url, you are generating 100 requests to your application with 10 concurrent workers. This simulates multiple users accessing your application simultaneously.
+* By running hey -n 100 -c 10 application_url, you are generating 100 requests to your application with 10 concurrent workers. This simulates multiple users accessing your application simultaneously.
 
 Monitoring Load Average:
 
-Load Average and CPU Count: The load average value is significant when compared to the number of CPU cores available on your machine.
+* Load Average and CPU Count: The load average value is significant when compared to the number of CPU cores available on your machine.
 
 Interpreting Load Average:
 
-If the load average is less than the number of CPU cores, the system can handle the current load without significant delays.
-
-If the load average is greater than the number of CPU cores, the system is overloaded, leading to delays in processing requests.
+* If the load average is less than the number of CPU cores, the system can handle the current load without significant delays.
+* If the load average is greater than the number of CPU cores, the system is overloaded, leading to delays in processing requests.
 
 # Example Scenario:
 
@@ -134,8 +141,11 @@ func main() {
 dd if=/dev/zero of=testfile bs=1M count=3000
 
     if=/dev/zero: The input file is /dev/zero, which generates zero-filled bytes.
+
     of=testfile: The output file is testfile.
+
     bs=1M: The block size is 1 megabyte.
+
     count=3000: Write 3000 blocks, resulting in a 3GB file.
 
 2. Monitoring Disk Usage:
@@ -161,7 +171,9 @@ As the disk fills up, the available space decreases. When the disk usage approac
 System Behavior:
 
 * Out of Disk Space: When the disk is full, the system cannot write new data. This can affect system logs, temporary files, and any applications that require disk write operations.
+
 * Application Impact: Applications that need to write data to disk may fail or experience errors. For instance, databases, file-based caching systems, and logging services may be particularly affected.
+
 * Service Disruption: If critical applications cannot write necessary data, it can lead to service unavailability and increased latency as applications might crash or fail to process requests properly.
 
 Error Messages:
