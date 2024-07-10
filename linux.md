@@ -1,4 +1,4 @@
-# Linux commands:
+# Linux common scenarios:
 # memory stress scenario
 1. Installing Stress-ng:
 
